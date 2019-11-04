@@ -1,7 +1,7 @@
 <!--
  * @Author: johnwang
  * @since: 2019-11-02 10:42:43
- * @lastTime: 2019-11-02 21:03:15
+ * @lastTime: 2019-11-04 16:34:47
  * @LastAuthor: Do not edit
  * @Github: https://github.com/tyutjohn
  -->
@@ -20,7 +20,7 @@
                 <el-input v-model="formlogin.email" style="width:80%" @keyup.enter.native="nextFocus()"></el-input>
               </el-form-item>
               <el-form-item label="密码">
-                <el-input v-model="formlogin.password" style="width:80%" @keyup.enter.native="login()" id="password">
+                <el-input v-model="formlogin.password" style="width:80%" @keyup.enter.native="login()" id="password" show-password>
                 </el-input>
               </el-form-item>
               <el-button type="primary" class="button"

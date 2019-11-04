@@ -1,7 +1,7 @@
 <!--
  * @Author: johnwang
  * @since: 2019-11-02 19:37:58
- * @lastTime: 2019-11-02 23:15:16
+ * @lastTime: 2019-11-04 16:08:48
  * @LastAuthor: Do not edit
  * @Github: https://github.com/tyutjohn
  -->
@@ -23,7 +23,7 @@
             </div>
             <div class="menu">
                 <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-                    background-color="#253e55" text-color="#fff">
+                    background-color="#253e55" text-color="#fff" @select="componentMount">
                     <el-submenu index="1">
                         <template slot="title">
                             <i class="el-icon-location"></i>
@@ -70,11 +70,13 @@
         </div>
         <div class="right flex">
             <Header :userImfor=user></Header>
-            <div style="margin-top:30px"></div>
-            <Calendar/>
-            <Bottom/>
+            <div style="margin-top:10px">
+                <router-view></router-view>
+            </div>
+            <Bottom />
         </div>
     </div>
+    
 </template>
 <style>
     .home {
@@ -127,7 +129,6 @@
 <script>
     import Header from '../components/Header'
     import Bottom from '../components/Bottom'
-    import Calendar from '../components/Calendar'
     export default {
         data() {
             return {
@@ -138,17 +139,18 @@
                 user: {
                     userAvatarSrc: '',
                     userName: ''
-                }
+                },
+                isCompany: 'Editor',
             };
         },
 
         components: {
             Header,
             Bottom,
-            Calendar
         },
 
-        computed: {},
+        computed: {
+        },
 
         beforeMount() {},
 
@@ -166,7 +168,7 @@
                     }
                 }).then(res => {
                     this.user.userAvatarSrc = res.data.avatar,
-                    this.user.userName = res.data.name
+                        this.user.userName = res.data.name
                 })
             },
             handleOpen(key, keyPath) {
@@ -174,10 +176,22 @@
             },
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
-            }
+            },
+            //动态加载工作区组件
+            componentMount(key) {
+                switch (key) {
+                    case '4-1':
+                        this.$router.push('/Adminuser');
+                        break;
+                    case '4-2':
+                        // this.$router.push('/Editor');
+                        break;
+                }
+            },
         },
 
-        watch: {}
+        watch: {
+        }
 
     }
 </script>
